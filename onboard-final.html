@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Next Trip - Final Step</title>
+    <!-- <link rel="stylesheet" href="mobile.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #A7C7E7; /* Soft Blue */
+            --primary-light: #C5DCEF;
+            --primary-dark: #7FA7C7;
+            --secondary-color: #F4E1C1; /* Warm Sand */
+            --secondary-light: #F9ECD9;
+            --secondary-dark: #E6CFA7;
+            --accent-color: #B8E0D2; /* Mint Green */
+            --accent-light: #D0EBE2;
+            --accent-dark: #8CC7B3;
+            --light-gray: #EAEAEA;
+            --charcoal: #4A4A4A;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-tertiary: rgba(255, 255, 255, 0.65);
+            --card-radius: 16px;
+            --button-radius: 14px;
+            --input-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background design elements */
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0.15;
+            filter: blur(50px);
+        }
+
+        .bg-shape-1 {
+            width: 300px;
+            height: 300px;
+            background-color: var(--primary-color);
+            top: -100px;
+            right: -50px;
+        }
+
+        .bg-shape-2 {
+            width: 350px;
+            height: 350px;
+            background-color: var(--secondary-color);
+            bottom: -150px;
+            left: -100px;
+        }
+
+        .bg-shape-3 {
+            width: 250px;
+            height: 250px;
+            background-color: var(--accent-color);
+            top: 40%;
+            left: 30%;
+        }
+
+        .bg-shape-4 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent-dark));
+            bottom: 20%;
+            right: -80px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Onboarding Header */
+        .onboarding-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .back-button svg {
+            color: var(--text-primary);
+        }
+
+        /* Progress Indicator */
+        .progress-container {
+            padding: 0 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 100%; /* 5 of 5 steps - complete */
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(184, 224, 210, 0.3);
+            position: relative;
+        }
+
+        .success-icon::after {
+            content: '';
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 2px solid rgba(184, 224, 210, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            color: var(--dark-bg);
+        }
+
+        .final-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+            max-width: 320px;
+        }
+
+        /* Features Highlight */
+        .features-highlight {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background-color: rgba(37, 37, 37, 0.7);
+            border-radius: var(--card-radius);
+            padding: 16px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon-1 {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        }
+
+        .feature-icon-2 {
+            background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+        }
+
+        .feature-icon-3 {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+        }
+
+        .feature-icon svg {
+            color: var(--dark-bg);
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .onboarding-footer {
+            padding: 20px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .finish-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark), var(--accent-color));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: var(--button-radius);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(167, 199, 231, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .finish-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .finish-button:hover::before {
+            left: 100%;
+        }
+
+        .finish-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(167, 199, 231, 0.4);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animated {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .feature-item:nth-child(1) {
+            animation: slideIn 0.5s 0.1s both;
+        }
+
+        .feature-item:nth-child(2) {
+            animation: slideIn 0.5s 0.3s both;
+        }
+
+        .feature-item:nth-child(3) {
+            animation: slideIn 0.5s 0.5s both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container animated">
+        <!-- Background Design Elements -->
+        <div class="bg-shape bg-shape-1"></div>
+        <div class="bg-shape bg-shape-2"></div>
+        <div class="bg-shape bg-shape-3"></div>
+        <div class="bg-shape bg-shape-4"></div>
+
+        <!-- Header -->
+        <div class="onboarding-header">
+            <a href="onboard-budget.html" class="back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </a>
+            <div class="progress-text">Step 5 of 5</div>
+            <div style="width: 40px;"></div> <!-- Empty div for alignment -->
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h1 class="final-title">You're all set!</h1>
+            <p class="final-subtitle">We've personalized your experience based on your preferences. Here's what you can now do:</p>
+
+            <div class="features-highlight">
+                <div class="feature-item">
+                    <div class="feature-icon feature-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16l4-4-4-4M8 12h8"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3 class="feature-title">AI-Powered Recommendations</h3>
+                        <p class="feature-description">Get personalized trip suggestions based on your preferences</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon feature-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3 class="feature-title">Smart Itinerary Planning</h3>
+                        <p class="feature-description">Create and customize detailed travel plans with ease</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon feature-icon-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3 class="feature-title">AI Chat Assistant</h3>
+                        <p class="feature-description">Ask questions and get instant travel guidance anytime</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="onboarding-footer">
+            <a href="home.html" class="finish-button">
+                Start Exploring
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

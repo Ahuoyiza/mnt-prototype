@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Next Trip - Your Travel Companion</title>
+    <!-- <link rel="stylesheet" href="mobile.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #A7C7E7; /* Soft Blue */
+            --primary-light: #C5DCEF;
+            --primary-dark: #7FA7C7;
+            --secondary-color: #F4E1C1; /* Warm Sand */
+            --accent-color: #B8E0D2; /* Mint Green */
+            --dark-bg: #0A0A0A;
+            --dark-surface: #151515;
+            --dark-card: #1C1C1C;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-tertiary: rgba(255, 255, 255, 0.65);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            max-width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Background Elements */
+        .bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                145deg, 
+                rgba(10, 10, 10, 0.85), 
+                rgba(10, 10, 10, 0.95)
+            );
+            z-index: 2;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.7) saturate(1.2);
+        }
+
+        .bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 3;
+            opacity: 0.5;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .shape-1 {
+            width: 250px;
+            height: 250px;
+            background-color: rgba(167, 199, 231, 0.15);
+            top: -50px;
+            right: -100px;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background-color: rgba(184, 224, 210, 0.15);
+            bottom: 10%;
+            left: -80px;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background-color: rgba(244, 225, 193, 0.1);
+            bottom: -150px;
+            right: 20%;
+        }
+
+        /* Content Area */
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            position: relative;
+            z-index: 10;
+            padding: 40px 24px;
+        }
+
+        .header {
+            padding-top: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 20px;
+            background: linear-gradient(90deg, var(--text-primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .main-content {
+            text-align: left;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        .headline {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .headline-gradient {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+
+        .feature {
+            padding: 16px;
+            background-color: rgba(28, 28, 28, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(167, 199, 231, 0.2), rgba(167, 199, 231, 0.1));
+            margin-bottom: 4px;
+        }
+
+        .feature-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Buttons */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 340px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .button {
+            padding: 18px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .primary-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--dark-bg);
+            box-shadow: 0 4px 25px rgba(167, 199, 231, 0.3);
+            border: none;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(167, 199, 231, 0.4);
+        }
+
+        .secondary-button {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Indicators */
+        .indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 30px;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .indicator.active {
+            background-color: var(--primary-color);
+            width: 24px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-screen">
+            <!-- Background Elements -->
+            <div class="bg-container">
+                <img src="/api/placeholder/1080/2340?text=" alt="" class="bg-image">
+                <div class="bg-gradient"></div>
+                <div class="bg-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content-container">
+                <div class="header">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text">My Next Trip</div>
+                    </div>
+                </div>
+                
+                <div class="main-content">
+                    <h1 class="headline">
+                        Discover your <span class="headline-gradient">perfect journey</span>
+                    </h1>
+                    <p class="tagline">Your AI-powered travel companion that creates personalized experiences tailored just for you.</p>
+                    
+                    <div class="features">
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 16l4-4-4-4M8 12h8"/>
+                                </svg>
+                            </div>
+                            <div class="feature-title">AI Planning</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </div>
+                            <div class="feature-title">Personalized</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <a href="onboard-bio.html" class="button primary-button">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="onboard-bio.html" class="button secondary-button">
+                        Sign In
+                    </a>
+                    
+                    <div class="indicators">
+                        <div class="indicator active"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

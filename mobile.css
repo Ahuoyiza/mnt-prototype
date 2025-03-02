@@ -1,0 +1,40 @@
+/* Hide main content on screens wider than mobile */
+@media screen and (min-width: 768px) {
+    body {
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Hide all body content */
+    main {
+        display: none;
+    }
+
+    /* Create mobile warning message */
+    body::before {
+        content: "📱 This site is only accessible on mobile devices";
+        display: block;
+        text-align: center;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 2px solid #ff6b6b;
+        border-radius: 10px;
+        max-width: 300px;
+        margin: 0 auto;
+        font-size: 18px;
+        color: #333;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+}
+
+/* Optional: Additional styling for mobile devices */
+@media screen and (max-width: 767px) {
+    body {
+        font-family: Arial, sans-serif;
+    }
+}
